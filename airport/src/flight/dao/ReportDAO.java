@@ -147,5 +147,45 @@ public class ReportDAO {
 		return runwayTypePerCountrys;
 	}
 	
+	public String[][] getMostCommonRunwaysIdent(){
+		String mostIdentTen[][] = new String[10][2];
+		DataSource ds=null;
+	    Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {		
+			ds = (DataSource)new InitialContext().lookup("java:comp/env/jdbc/MyDB");
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement("select runways.le_ident, count(runways.le_ident) from runways  inner join airports on runways.airport_ident = airports.ident group by le_ident order by count(runways.le_ident)  Desc limit 10");
+		    rs =  stmt.executeQuery();
+			int i=0;
+			while (rs.next()) {
+				mostIdentTen[i][0] = rs.getString(1);
+				mostIdentTen[i][1] = rs.getString(2);				
+				i++;
+			}
+			stmt.close();
+			stmt = null;	 
+		} catch (Exception e) {
+			e.printStackTrace();
+	    } finally { //cleanup
+	    	if (stmt != null) {
+	    		try {
+	    			stmt.close();
+	    		} catch (SQLException ex) {
+	    			System.out.println(ex);
+	    		}
+	        }
+	        if (conn != null) {
+	        	try {
+	        		conn.close();
+	        	} catch (SQLException ex) {
+	        		System.out.println(ex);
+	        	}
+	        }
+	    }
+		return mostIdentTen;
+	}
 	
+			
 }

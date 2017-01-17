@@ -13,12 +13,15 @@ public class ReportCtl {
 	private ReportDAO reportDAO = new ReportDAO();
 	private String topTen[][] = new String[10][2];
 	private String lowTen[][] = new String[10][2];
+	private String mostIdentTen[][] = new String[10][2];
 	private HashMap< String, ArrayList<String>> runwayTypePerCountrys ;
 
 	public ReportCtl(){
 		topTen = reportDAO.getTopTenCountriesAirportCount();
 		lowTen = reportDAO.getLowTenCountriesAirportCount();
-		setRunwayTypePerCountrys(reportDAO.getRunwayTypePerCountry());
+		runwayTypePerCountrys = reportDAO.getRunwayTypePerCountry();
+		setMostIdentTen(reportDAO.getMostCommonRunwaysIdent());
+				//setRunwayTypePerCountrys();
 	}
 	
 	public String[][] getTopTen() {
@@ -43,6 +46,14 @@ public class ReportCtl {
 
 	public void setRunwayTypePerCountrys(HashMap< String, ArrayList<String>> runwayTypePerCountrys) {
 		this.runwayTypePerCountrys = runwayTypePerCountrys;
+	}
+
+	public String[][] getMostIdentTen() {
+		return mostIdentTen;
+	}
+
+	public void setMostIdentTen(String mostIdentTen[][]) {
+		this.mostIdentTen = mostIdentTen;
 	}
 
  

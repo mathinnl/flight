@@ -1,6 +1,6 @@
 <?page title="reports" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="query" border="normal"  width="100%" apply="org.zkoss.bind.BindComposer"
+<window title="Report" border="normal"  width="100%" apply="org.zkoss.bind.BindComposer"
         viewModel="@id('vm') @init('flight.ctl.ReportCtl')">
    
 Top 10 countries with highest Airports number
@@ -63,6 +63,21 @@ Top 10 countries with highest Airports number
 			</template>
     </grid>
  
+Top 10 most used runways ident
+    <grid id="grid4"
+        model="@bind(vm.mostIdentTen)"   
+          emptyMessage="No data found">
+        <columns>
+            <column hflex="1" label="Ident" align="left" />
+             <column hflex="2" label="Count" align="left" />
+        </columns>
+      <template name="model">
+				<row>
+					<label value="@load(each[0])" />
+					<label value="@load(each[1])" />
+				</row>
+			</template>
+    </grid>
     
     
 </window>
