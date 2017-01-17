@@ -1,0 +1,8 @@
+<?page title="flight records"?>
+<window title="flight records" border="normal" width="100%" height="100%">
+Please choose :
+ <a href="query.zul">query</a>
+ or 
+<a href="report.zul">report</a>
+
+</window>

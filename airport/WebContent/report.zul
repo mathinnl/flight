@@ -1,0 +1,69 @@
+<?page title="reports" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="query" border="normal"  width="100%" apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('flight.ctl.ReportCtl')">
+   
+Top 10 countries with highest Airports number
+    <grid id="grid"
+        model="@bind(vm.topTen)"   
+          emptyMessage="No data found">
+        <columns>
+            <column hflex="1" label="Country" align="left" />
+             <column hflex="2" label="Aiports count" align="left" />
+        </columns>
+      <template name="model">
+				<row>
+					<label value="@load(each[0])" />
+					<label value="@load(each[1])" />
+				</row>
+			</template>
+    </grid>
+
+10 countries with the lowest Airports number
+<grid id="grid2"
+        model="@bind(vm.lowTen)"   
+          emptyMessage="No data found">
+        <columns>
+            <column hflex="1" label="Country" align="left" />
+             <column hflex="2" label="Aiports count" align="left" />
+        </columns>
+      <template name="model">
+				<row>
+					<label value="@load(each[0])" />
+					<label value="@load(each[1])" />
+				</row>
+			</template>
+    </grid>
+    
+ Runways type per country
+ 
+    <grid id="grid3"
+        model="@bind(vm.runwayTypePerCountrys.entrySet())"   
+        mold="paging" pageSize="5"  emptyMessage="No data found">
+        <columns>
+            <column hflex="1" label="Country Name" align="left" />
+             <column hflex="3" label="Runways type" align="left" />
+        </columns>
+      <template name="model" var="dd">
+				<row>
+					<label value="@load(dd.key)" />
+					 <grid 
+				        model="@bind(dd.value) @template('myTemplate')"
+				        mold="paging" pageSize="6">
+				        <columns>
+				            <column hflex="1" label="Runway" align="left" />
+				        </columns>
+				      	<template name="myTemplate">
+							<row>
+								<label value="@load(each)" />
+							</row>
+						</template>
+					</grid>
+				</row>
+			</template>
+    </grid>
+ 
+    
+    
+</window>
+</zk>

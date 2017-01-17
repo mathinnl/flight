@@ -1,0 +1,47 @@
+<?page title="query" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window title="query" border="normal" height="100%" width="100%" apply="org.zkoss.bind.BindComposer"
+        viewModel="@id('vm') @init('flight.ctl.QueryCtl')">
+   
+
+<zscript>
+        void prepare() 
+        {
+            combo2.setModel(((SimpleListModel)combo2.getModel()).getSubModel(combo2.getValue(),10));
+        }
+</zscript>
+
+<combobox id="combo2"  autodrop="true" buttonVisible="true" model="@bind(vm.simpleListModel)" autocomplete="true" instant="true" selectedItem="@bind(vm.searchString)"/>
+<button id="search" label="search" onClick="@command('search')"/>             
+      <grid id="grid"
+        model="@bind(vm.airports)"   
+        mold="paging" pageSize="5"  emptyMessage="No data found">
+        <columns>
+            <column hflex="1" label="Aiport Name" align="left" />
+             <column hflex="2" label="Aiport ident" align="left" />
+            <column hflex="3" label="Runways" align="left" />
+        </columns>
+      <template name="model">
+				<row>
+					<label value="@load(each.name)" />
+					<label value="@load(each.ident)" />
+					 <grid 
+				        model="@bind(each.runways) @template('myTemplate')"
+				        mold="paging" pageSize="6">
+				        <columns>
+				            <column hflex="1" label="Runway Id" align="left" />
+				        </columns>
+				      	<template name="myTemplate">
+							<row>
+								<label value="@load(each.id)" />
+							</row>
+						</template>
+					</grid>
+				</row>
+			</template>
+    </grid>
+   
+</window>
+</zk>
+
