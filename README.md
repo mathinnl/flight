@@ -9,5 +9,5 @@ Use cases
     Type of runways (as indicated in "surface" column) per country
     Print the top 10 most common runway identifications (indicated in "le_ident" column)
 
-This project was made build with eclipse Mars2 and the Zk studio plugin https://www.zkoss.org/product/zkstudio
-It was tested on tomcat 7 with Mysql. Sql creation script is at root.
+This project was built with eclipse Mars2 and the Zk studio plugin https://www.zkoss.org/product/zkstudio
+It has been tested and fully worked on tomcat 7 with Mysql. Sql creation script is at the root.
